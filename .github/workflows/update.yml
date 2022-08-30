@@ -1,0 +1,24 @@
+on:
+  workflow_dispatch:
+  schedule:
+    # PostNord usually updates it every March.
+    - cron: 23 18 * 3 2
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - name: Generate the update
+        run: bash run.sh
+      - name: Commit and push the update
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -am "update"
+          git fetch
+          git rebase origin/master
+          git push
