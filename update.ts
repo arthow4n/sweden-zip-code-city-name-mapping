@@ -27,6 +27,11 @@ for (const prefix of range) {
   console.log(
     `${new Date().toISOString()} Fetching for ${prefix}/${range.at(-1)}`
   );
+  await new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 3000);
+  });
   const codes = await fetchPostNumbers(prefix);
   for (const code of codes) {
     postalCodeCityNameMapping[code.postalCode] = code.postalCity;
