@@ -1,8 +1,8 @@
 on:
   workflow_dispatch:
-  schedule:
-    # PostNord usually updates it every March.
-    - cron: 23 18 * 3 2
+  # schedule:
+  #   # PostNord usually updates it every March.
+  #   - cron: 23 18 * 3 2
 
 jobs:
   update:
